@@ -1,0 +1,72 @@
+package net.minecraft.src;
+
+public class mod_obsidianSword extends BaseMod{
+
+public mod_obsidianSword(){}
+
+public static Item block;public void load(){
+ModLoader.addRecipe(new ItemStack(block, 1), new Object[]{
+  "X1X", "X4X", "X7X", Character.valueOf('1'), new ItemStack(Block.obsidian, 1), Character.valueOf('4'), new ItemStack(Block.obsidian, 1), Character.valueOf('7'), new ItemStack(Item.stick, 1), 
+});ModLoader.addName(block, "Obsidian Sword of Java");}
+public String getVersion(){
+return "1.0";
+}
+
+static{
+block = (new ItemobsidianSword(148)).setIconCoord(14, 13).setItemName("Obsidian Sword of Java");
+
+}
+
+static class ItemobsidianSword extends Item{
+
+public ItemobsidianSword(int par1){
+super(par1);
+setMaxDamage(50);
+maxStackSize = 1;
+setCreativeTab(CreativeTabs.tabCombat);
+}
+public boolean hasEffect(ItemStack par1ItemStack)
+{
+    return true;
+}
+public String getTextureFile(){return "/LOTR.png";}
+public int getItemEnchantability()
+{
+    return 15;
+}
+public int getMaxItemUseDuration(ItemStack par1ItemStack)
+{
+    return 10;
+}
+public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
+{
+    return 1.5F;
+}
+public int getDamageVsEntity(Entity par1Entity)
+{
+    return 10;
+}
+public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entity){
+float var4 = 1.0F;
+int i = (int)(entity.prevPosX + (entity.posX - entity.prevPosX) * (double)var4);
+int j = (int)(entity.prevPosY + (entity.posY - entity.prevPosY) * (double)var4 + 1.62D - (double)entity.yOffset);
+int k = (int)(entity.prevPosZ + (entity.posZ - entity.prevPosZ) * (double)var4);
+
+world.createExplosion((Entity)null, i, j, k, 3);
+return itemstack;
+}
+public void addInformation(ItemStack itemstack, java.util.List list)
+{
+list.add("It's a sword");
+list.add(" made with Java");
+list.add(" enjoy it.");
+}
+public boolean doesContainerItemLeaveCraftingGrid(ItemStack par1ItemStack)
+{
+    return true;
+}
+
+
+
+
+}}
